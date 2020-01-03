@@ -1,0 +1,23 @@
+{
+  "name": "reddit_js",
+  "version": "1.0.0",
+  "description": "learn along with make schools tutorial",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sprajjwal/tutorial-nodejs_reddit.git"
+  },
+  "author": "Shashwat Prajjwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sprajjwal/tutorial-nodejs_reddit/issues"
+  },
+  "homepage": "https://github.com/sprajjwal/tutorial-nodejs_reddit#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0"
+  }
+}
