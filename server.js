@@ -1,8 +1,29 @@
 const express = require('express')
-const path = require('path')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/head.html')))
+const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+
+// Use Body Parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Add after body parser initialization!
+app.use(expressValidator());
+
+require('./controllers/posts')(app);
+
+require('./data/reddit-db');
+
+
+
+app.get('/', (req, res) => res.render('index'))
+app.get('/posts/new', (req, res) => res.render('posts-new'))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+// Handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
