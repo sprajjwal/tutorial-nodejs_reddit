@@ -10,14 +10,24 @@ module.exports = app => {
         })
     });
 
-    app.get("/posts/index", (req, res) => {
-        console.log('in here')
+    app.get("/", (req, res) => {
         Post.find({})
         .then(posts => {
             res.render("posts-index", {posts});
         })
         .catch(err => {
-            console.log(err.message);
+            console.log('error', err.message);
         });
-    })
+    });
+
+    app.get("/posts/:id", function(req, res) {
+        // LOOK UP THE POST
+        Post.findById(req.params.id)
+          .then(post => {
+            res.render("posts-show", { post });
+          })
+          .catch(err => {
+            console.log(err.message);
+          });
+      });
 };
