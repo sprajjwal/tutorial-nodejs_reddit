@@ -9,4 +9,15 @@ module.exports = app => {
             return res.redirect(`/`);
         })
     });
+
+    app.get("/posts/index", (req, res) => {
+        console.log('in here')
+        Post.find({})
+        .then(posts => {
+            res.render("posts-index", {posts});
+        })
+        .catch(err => {
+            console.log(err.message);
+        });
+    })
 };

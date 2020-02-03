@@ -21,6 +21,7 @@ require('./data/reddit-db');
 
 app.get('/', (req, res) => res.render('index'))
 app.get('/posts/new', (req, res) => res.render('posts-new'))
+app.get('/posts/index', (req, res) => res.render('posts-index'))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
