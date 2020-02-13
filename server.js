@@ -18,6 +18,7 @@ app.set('view engine', 'handlebars');
 app.use(expressValidator());
 
 require('./controllers/posts')(app);
+require('./controllers/comments.js')(app);
 
 require('./data/reddit-db');
 
