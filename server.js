@@ -1,10 +1,13 @@
 const express = require('express')
 const app = express()
 const port = 3000
+require('dotenv').config();
 
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 // Use Body Parser
 app.use(bodyParser.json());
@@ -17,8 +20,13 @@ app.set('view engine', 'handlebars');
 // Add after body parser initialization!
 app.use(expressValidator());
 
+// enable JWT
+app.use(cookieParser());
+
 require('./controllers/posts')(app);
 require('./controllers/comments.js')(app);
+require('./controllers/auth.js')(app);
+
 
 require('./data/reddit-db');
 
