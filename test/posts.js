@@ -26,6 +26,36 @@ describe('Posts', function() {
     username: 'poststest',
     password: 'testposts'
   };
+
+  it("shouldn't create a post without auth", function(done) {
+    Post.estimatedDocumentCount()
+      .then(function(initialDocCount) {
+        agent
+          .post("/post/new")
+          .set("content-type", "application/x-www-form-urlencoded")
+          .send(newPost)
+          .then(function(res) {
+            Post.estimatedDocumentCount()
+              .then(function(newDocCount) {
+                expect(res).to.have.status(401);
+                expect(newDocCount).to.be.equal(initialDocCount)
+                done();
+              })
+              .catch(function(err) {
+                console.log(err)
+                done();
+              })
+          })
+          .catch(function(err) {
+            console.log(err)
+            done();
+          })
+      })
+      .catch(function(err) {
+        console.log(err)
+        done();
+      })
+  })
   
   before(function (done) {
     agent
@@ -71,6 +101,8 @@ describe('Posts', function() {
       done(err);
     });
   });
+
+
   
   after(function (done) {
     Post.findOneAndDelete(newPost)
