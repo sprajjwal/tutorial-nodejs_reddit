@@ -12,7 +12,13 @@ const PostSchema = new Schema({
 });
 
 PostSchema
-    .pre('findOne', Populate('author'))
-    .pre('find', Populate('author'))
+    .pre('findOne', function() {
+        Populate('comments')
+        Populate('author');
+      })
+    .pre('find', function() {
+        Populate('comments')
+        Populate('author');
+    })
 
 module.exports =  mongoose.model("Post", PostSchema)

@@ -41,14 +41,16 @@ module.exports = app => {
 
   app.get("/posts/:id", function(req, res) {
     // LOOK UP THE POST
-    Post.findById(req.params.id).populate('comments')
+    var currentUser = req.user;
+    Post.findById(req.params.id).populate('comments').lean()
       .then(post => {
-        res.render("posts-show", { post });
+        res.render("posts-show", { post, currentUser });  
       })
       .catch(err => {
-        console.log(err.message);
+          console.log(err.message);
       });
-    });
+  });
+  
   app.get("/n/:subreddit", function(req, res) {
     const currentUser = req.user
     Post.find({ subreddit: req.params.subreddit }).lean()
