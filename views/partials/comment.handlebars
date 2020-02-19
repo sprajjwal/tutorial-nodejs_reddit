@@ -1,8 +1,5 @@
 <div class="col-xs-12 comment-indent">
     <p>{{comment.content}}</p>
-    {{#if comment._id}}
-        <p>comment id {{comment._id}}</p>
-    {{/if}}
     <p class="text-right">{{comment.author.username}}</p>
     <a href="/posts/{{postId}}/comments/{{comment._id}}/replies/new">Reply</a>
     <br>
